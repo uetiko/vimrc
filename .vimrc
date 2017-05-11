@@ -94,13 +94,14 @@ call vundle#begin()
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'ervandew/supertab'
 Plugin 'shawncplus/phpcomplete.vim'
@@ -114,6 +115,9 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'mtscout6/vim-cjsx'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'yggdroot/indentline'
 
 
 call vundle#end()            " required
@@ -134,10 +138,13 @@ let g:ycm_key_list_select_completion=['<C-n>, <Down>']
 let g:ycm_key_list_previus_completion=['C-p', '<Up>']
 let g:SuperTabDefaultCompletionType='<C-n>'
 
+"" YCM config
+let g:ycm_python_binary_path = 'python'
+
 "" ULTISNIPS
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<C-tab>"
 let g:UtilSnipsListSnippets="<C-tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<ALT-tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
@@ -154,6 +161,7 @@ let g:typescript_compiler_options = ''
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType typescript :set makeprg=tsc
+
 
 "" clang format
 let g:clang_format#style_options = {
@@ -178,6 +186,12 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+"" ignore for vimgrep
+
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\v[\/]\.(git|hg|svn|vevn|venv|node_modules)$',
+    \ 'file': '\v\.(pyc|class|so|swp|swo)$',
+    \}
 
 "" coffeescript
 augroup CoffeeBufNew
@@ -193,3 +207,10 @@ highlight ColorColumn ctermbg=yellow
 let &colorcolumn=80
 map <F4> :call UpdateTitle()<cr>'s
 
+
+"" otras configuraciones interesantes
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
