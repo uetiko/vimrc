@@ -1,6 +1,6 @@
 " File: .vimrc
 " Autor: Uetiko
-" Version: 0.2
+" Version: 0.3.1
 
 
 " I like 4 spaces for indenting
@@ -118,6 +118,17 @@ Plugin 'mtscout6/vim-cjsx'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'yggdroot/indentline'
+Plugin 'noahfrederick/vim-laravel'
+Plugin 'stanangeloff/php.vim'
+Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'joonty/vdebug'
+Plugin 'benmills/vimux'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'justincampbell/vim-eighties'
+Plugin 'wahidrahim/resize-font'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'webdevel/tabulous'
+Plugin 'manasthakur/vimsessionist'
 
 
 call vundle#end()            " required
@@ -142,7 +153,7 @@ let g:SuperTabDefaultCompletionType='<C-n>'
 let g:ycm_python_binary_path = 'python'
 
 "" ULTISNIPS
-let g:UltiSnipsExpandTrigger="<C-tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UtilSnipsListSnippets="<C-tab>"
 let g:UltiSnipsJumpForwardTrigger="<ALT-tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -214,3 +225,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+"" color schema vim
+syntax enable
+
+
+"" set numbres
+set number relativenumber
