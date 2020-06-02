@@ -159,12 +159,17 @@ let g:UltiSnipsJumpForwardTrigger="<ALT-tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
+"" AIRLINE
 let g:airline_left_sep='>'
 let g:airline_right_sep='<'
 let g:airline_detect_modified=1
 let g:airline_section_b = '%{strftime("%c")}'
 let g:airline_section_y = 'BN: %{bufnr("%")}'
-let g:airline_theme='dark'
+let g:airline_theme='kolor'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 "" typescript
 let g:typescript_compiler_binary = 'tsc'
@@ -203,16 +208,6 @@ let g:ctrlp_custom_ignore = {
     \ 'dir': '\v[\/]\.(git|hg|svn|vevn|venv|node_modules)$',
     \ 'file': '\v\.(pyc|class|so|swp|swo)$',
     \}
-
-"" coffeescript
-augroup CoffeeBufNew
-    autocmd User * set wrap
-augroup END
-
-" Switch back to the source buffer after updating.
-let coffee_indent_keep_current = 1
-
-
 
 highlight ColorColumn ctermbg=yellow
 let &colorcolumn=80
