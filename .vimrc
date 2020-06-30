@@ -30,6 +30,47 @@ filetype off
 
 syntax on
 
+" Terminal color
+if has("gui_running")
+    set guifont=Courier:h18
+    set background=dark
+    set t_Co=256
+    set cursorline
+    highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
+    colors moria
+else
+    highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
+    set cursorline
+    colors default
+endif
+
+" vim directories
+set backup
+set backupdir=~/.vim/backup/
+set dir=~/.vim/tmp/
+
+" status line
+set laststatus=2
+set statusline=\ %{HasPaste()}%<%-15.25(%f%)%m%r%h\ %w\ \ 
+set statusline+=\ \ \ [%{&ff}/%Y] 
+set statusline+=\ \ \ %<%20.30(%{hostname()}:%{CurDir()}%)\ 
+set statusline+=%=%-10.(%l,%c%V%)\ %p%%/%L
+
+
+fun! CurDir()
+    let curdir = substitute(getcwd(), $HOME, "~", "")
+    return curdir
+endfun
+
+fun! HasPaste()
+    if &paste
+        return '[PASTE]'
+    else
+        return ''
+    endif
+endfun
+
+
 " #########################################################
 " # Python config
 " #
@@ -48,15 +89,6 @@ au BufNewFile,BufRead *.py, *.php
 " make my code look pretty
 let python_highlight_all=1
 
-"python with virtualenv support
-"py << EOF
-" import os
-" import sys
-" if 'VIRTUAL_ENV' in os.environ:
-"   project_base_dir = os.environ['VIRTUAL_ENV']
-"     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"       execfile(activate_this, dict(__file__=activate_this))
-"       EOF
 
 au BufNewFile,BufRead *.js, *.html, *.css, *.json
     \ set tabstop=2 |
@@ -76,17 +108,6 @@ au BufNewFile,BufRead *.ts
     \ set autoindent |
     \ set fileformat=unix
     \ set filetype=ts
-
-au BufNewFile,BufRead *.coffee 
-    \ set tabstop=2 |
-    \ set softtabstop=2 | 
-    \ set shiftwidth=2
-    \ set textwidth=89 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-    \ set filetype=coffee
-
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -111,10 +132,8 @@ Bundle 'wakatime/vim-wakatime'
 Plugin 'klen/python-mode'
 Plugin 'nvie/vim-flake8'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'mtscout6/vim-cjsx'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'yggdroot/indentline'
@@ -129,6 +148,8 @@ Plugin 'wahidrahim/resize-font'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'webdevel/tabulous'
 Plugin 'manasthakur/vimsessionist'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'pangloss/vim-javascript'
 
 
 call vundle#end()            " required
@@ -178,7 +199,6 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType typescript :set makeprg=tsc
 
-
 "" clang format
 let g:clang_format#style_options = {
             \ "AccessModifierOffset" : -4,
@@ -202,6 +222,9 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endi
+
 "" ignore for vimgrep
 
 let g:ctrlp_custom_ignore = {
@@ -209,6 +232,7 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(pyc|class|so|swp|swo)$',
     \}
 
+" code limit
 highlight ColorColumn ctermbg=yellow
 let &colorcolumn=80
 map <F4> :call UpdateTitle()<cr>'s
@@ -227,3 +251,28 @@ syntax enable
 
 "" set numbres
 set number relativenumber
+
+"" vim javascript config
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
+let g:javascript_conceal_noarg_arrow_function = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
+set conceallevel=1
+
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
+
