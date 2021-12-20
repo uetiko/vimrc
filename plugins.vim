@@ -26,6 +26,11 @@ Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'yggdroot/indentline'
+Plugin 'junegunn/fzf', { 'do': {-> fzf#install()} }
+Plugin 'junegunn/fzf.vim'
+Plugin 'rust-lang/rust.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

@@ -1,6 +1,6 @@
 
 "" nerdtree git
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -90,10 +90,10 @@ let g:clang_format#style_options = {
 autocmd FileType c ClangFormatAutoEnable
 
 " indent guides
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+"let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_auto_colors = 0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 
 "" typescript
 let g:typescript_indent_disable = 1
@@ -109,8 +109,20 @@ let g:phpcomplete_parse_docblock_comments=1
 let g:phpcomplete_search_tags_for_variables=1
 
 let g:phpcomplete_mappings = {
-   \ 'jump_to_def': '<C-]>',
-   \ 'jump_to_def_split': '<C-W><C-]>',
-   \ 'jump_to_def_vsplit': '<C-W><C-\>',
-   \ 'jump_to_def_tabnew': '<C-W><C-[>',
+   \ 'jump_to_def': '<C-B>',
+   \ 'jump_to_def_split': '<C-W><C-V>',
+   \ 'jump_to_def_vsplit': '<C-W><C-/>',
+   \ 'jump_to_def_tabnew': '<C-W><C-I>',
    \}
+
+" indentline
+
+let g:indentLine_char='|'
+
+" vim gutter
+
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=yellow
