@@ -11,6 +11,8 @@ function make_symbolic_links() {
 
 function make_dir(){
     mkdir -p ~/.vim/config/
+    mkdir -p ~/.vim/backup/
+    mkdir -p ~/.vim/tmp/
 }
 
 function main(){
