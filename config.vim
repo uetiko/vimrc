@@ -11,6 +11,8 @@ set cindent
 set ai
 " Use Vim settings, rather then Vi settings (much better!).
 set nocompatible
+set nolist
+set rnu
 " set the commandheight
 set cmdheight=2
 " command line history
@@ -81,7 +83,7 @@ au BufNewFile,BufRead *.py, *.php
 let python_highlight_all=1
 
 
-au BufNewFile,BufRead *.js, *.html, *.css, *.json
+au BufNewFile,BufRead *.js, *.html, *.css, *.json, *.yml
     \ set tabstop=2 |
     \ set softtabstop=2 | 
     \ set shiftwidth=2
