@@ -1,36 +1,58 @@
+" File: plugins.vim
+" Gestor: vim-plug  (https://github.com/junegunn/vim-plug)
+" Instalar/actualizar:  :PlugInstall  /  :PlugUpdate  /  :PlugClean
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+" Autoinstala vim-plug si no esta presente todavia.
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'xuyuanp/nerdtree-git-plugin'
-Plugin 'scrooloose/syntastic'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'majutsushi/tagbar'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
-Plugin 'pangloss/vim-javascript'
-Plugin 'wakatime/vim-wakatime'
-Plugin 'nvie/vim-flake8'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'rhysd/vim-clang-format'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'manasthakur/vimsessionist'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'yggdroot/indentline'
-Plugin 'junegunn/fzf', { 'do': {-> fzf#install()} }
-Plugin 'junegunn/fzf.vim'
-Plugin 'rust-lang/rust.vim'
+call plug#begin('~/.vim/plugged')
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+" --- Explorador de archivos ---
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" --- Interfaz ---
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Yggdroot/indentLine'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+
+" --- Git ---
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" --- Busqueda ---
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" --- Linting / diagnosticos (asincrono, sustituye a syntastic + vim-flake8) ---
+Plug 'dense-analysis/ale'
+
+" --- Tags (sustituye a xolox/vim-easytags + vim-misc) ---
+Plug 'preservim/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
+
+" --- Snippets ---
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" --- Lenguajes ---
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'rhysd/vim-clang-format'
+
+" --- Sesiones ---
+Plug 'manasthakur/vimsessionist'
+
+" --- Otros ---
+Plug 'wakatime/vim-wakatime'
+
+call plug#end()
+
+" plug#end() ya ejecuta 'filetype plugin indent on' y 'syntax enable'.
